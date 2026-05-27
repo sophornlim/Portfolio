@@ -1,0 +1,56 @@
+{
+  "entities": {
+    "inquiry": {
+      "title": "Inquiry",
+      "description": "Recruiter or visitor inquiry submit form data",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "email", "message", "createdAt"]
+    },
+    "session": {
+      "title": "ChatSession",
+      "description": "AI chatbot session metadata document",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "createdAt", "updatedAt"]
+    },
+    "chat_message": {
+      "title": "ChatMessage",
+      "description": "A single message inside a chat session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "text": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "role", "text", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/inquiries/{inquiryId}": {
+      "schema": "inquiry",
+      "description": "Collection of visitor contact messages and career opportunities."
+    },
+    "/sessions/{sessionId}": {
+      "schema": "session",
+      "description": "Main chatbot session metadata documents."
+    },
+    "/sessions/{sessionId}/messages/{messageId}": {
+      "schema": "chat_message",
+      "description": "Sub-collection containing the individual bubble messages per session."
+    }
+  }
+}

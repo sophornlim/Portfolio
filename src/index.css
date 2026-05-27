@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Ubuntu+Mono:wght@400;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Ubuntu', sans-serif;
+  --font-mono: 'Ubuntu Mono', monospace;
+
+  --color-navy: #0b1f35;
+  --color-deep: #071529;
+  --color-teal-dark: #1a6b8a;
+  --color-teal-light: #2e9bbf;
+  --color-gold: #c9a84c;
+  --color-gold-light: #e8c97a;
+  --color-off-white: #e8e4dc;
+  --color-muted-blue: #8a9bb0;
+  --color-card-bg: #0f2540;
+}
+
+/* Base style resets and customizations to match original exactly */
+body {
+  background: #071529;
+  color: #e8e4dc;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #071529;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a6b8a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2e9bbf;
+}
+
+/* Utility Animations & Borders mimicking the original */
+.divider-line {
+  border: none;
+  border-top: 1px solid rgba(41, 113, 151, 0.25);
+}
+
+.hero-glow-bg {
+  background:
+    radial-gradient(ellipse 60% 70% at 80% 40%, rgba(26,107,138,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(201,168,76,0.08) 0%, transparent 60%),
+    linear-gradient(160deg, #071529 0%, #0b1f35 100%);
+}
+
+.hero-grid-mesh {
+  opacity: 0.07;
+  background-image:
+    linear-gradient(#1a6b8a 1px, transparent 1px),
+    linear-gradient(90deg, #1a6b8a 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.btn-primary-style {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  background: #1a6b8a;
+  color: #fff;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #2e9bbf;
+  border-radius: 9999px;
+  transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+}
+.btn-primary-style:hover {
+  background: #2e9bbf;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(46,155,191,0.3);
+}
+
+.btn-outline-style {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 2rem;
+  background: transparent;
+  color: #e8e4dc;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid rgba(41,113,151,0.25);
+  border-radius: 9999px;
+  transition: border-color 0.25s, color 0.25s, transform 0.2s;
+}
+.btn-outline-style:hover {
+  border-color: #c9a84c;
+  color: #c9a84c;
+  transform: translateY(-2px);
+}
+
+/* Core skills cards */
+.skill-card-style {
+  background: #0f2540;
+  border: 1px solid rgba(41, 113, 151, 0.25);
+  border-radius: 1.25rem;
+  padding: 2rem 1.8rem;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.skill-card-style::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, #1a6b8a, #c9a84c);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.skill-card-style:hover {
+  border-color: #1a6b8a;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(46, 155, 191, 0.12);
+}
+.skill-card-style:hover::before {
+  transform: scaleX(1);
+}
+
+/* Timeline specific styles matching original */
+.timeline-line {
+  position: relative;
+}
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, #1a6b8a, transparent);
+}
+
+.timeline-dot-style {
+  position: absolute;
+  left: -2.35rem;
+  top: 0.3rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #1a6b8a;
+  border: 2px solid #2e9bbf;
+  box-shadow: 0 0 10px #1a6b8a;
+}
+
+/* Certifications list badges */
+.cert-badge-style {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 0.73rem;
+  letter-spacing: 0.08em;
+  color: #2e9bbf;
+  border: 1px solid rgba(46,155,191,0.3);
+  background: rgba(46,155,191,0.06);
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  cursor: default;
+}
+.cert-badge-style:hover {
+  background: rgba(46,155,191,0.15);
+  border-color: #2e9bbf;
+  color: #fff;
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   PRINT MEDIA STYLES (Professional PDF and A4/Letter Layout)
+   ────────────────────────────────────────────────────────────────────────── */
+@media print {
+  /* 1. Global Reset for White Background & Dark Text */
+  html, body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-family: 'Ubuntu', -apple-system, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Remove all background decorations, gradients, noise, and grids */
+  body::before {
+    display: none !important;
+    background: none !important;
+  }
+  
+  .hero-glow-bg, .hero-grid-mesh {
+    background: none !important;
+    background-image: none !important;
+  }
+
+  /* 2. Hide Non-Printable Interactive Elements */
+  nav,
+  header button,
+  footer button,
+  form,
+  button,
+  iframe,
+  input,
+  textarea,
+  .no-print,
+  .fixed,
+  .print\:hidden,
+  .print-hidden,
+  a[href*="t.me"],
+  a[href*="linkedin.com/messaging"] {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* 3. Section Adjustments */
+  section {
+    padding: 1.5rem 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    background-color: transparent !important;
+    min-height: auto !important;
+    height: auto !important;
+    border: none !important;
+  }
+
+  /* Page structure break rules */
+  .page-break-avoid {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* 4. Typography Adjustments */
+  h1 {
+    font-size: 28pt !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    margin-bottom: 4px !important;
+    line-height: 1.1 !important;
+  }
+
+  h2 {
+    font-size: 15pt !important;
+    color: #1e3a8a !important;
+    font-weight: 700 !important;
+    border-bottom: 1.5px solid #e2e8f0 !important;
+    padding-bottom: 3px !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  h3 {
+    font-size: 11pt !important;
+    color: #1e293b !important;
+    font-weight: 600 !important;
+    margin-bottom: 2px !important;
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  p, li, span, div, td {
+    color: #334155 !important;
+  }
+
+  .text-gold, .text-gold-light {
+    color: #b45309 !important; /* Darker warm color for text contrast */
+  }
+
+  .text-muted-blue, .text-teal-light {
+    color: #475569 !important; /* Proper contrast slate */
+  }
+
+  /* Contact and profile details list adjustment */
+  .border-b {
+    border-bottom-color: #cbd5e1 !important;
+  }
+
+  .border-teal-dark {
+    border-color: #cbd5e1 !important;
+  }
+
+  /* Skill list adjustments on print */
+  .skill-card-style {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
+    padding: 1rem !important;
+    box-shadow: none !important;
+    transform: none !important;
+    border-radius: 6px !important;
+  }
+
+  .skill-card-style::before {
+    display: none !important;
+  }
+
+  /* Certifications print badges */
+  .cert-badge-style {
+    color: #1e293b !important;
+    background: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    padding: 0.25rem 0.6rem !important;
+    font-size: 8pt !important;
+    border-radius: 4px !important;
+  }
+
+  /* Grid layout adjustment to match paper columns */
+  .grid-cols-1, .grid-cols-2, .grid-cols-3, .md\\:grid-cols-2, .lg\\:grid-cols-3 {
+    grid-template-cols: repeat(1, minmax(0, 1fr)) !important;
+  }
+
+  /* Education & Experience Blocks spacing */
+  .timeline-line::before {
+    background: #cbd5e1 !important;
+  }
+
+  .timeline-dot-style {
+    background: #1e3a8a !important;
+    border-color: #ffffff !important;
+    box-shadow: none !important;
+  }
+
+  /* Hyperlinks format: print text and hide underline where not constructive */
+  a {
+    color: #1e3a8a !important;
+    text-decoration: underline !important;
+  }
+}

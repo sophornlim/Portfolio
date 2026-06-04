@@ -1,6 +1,6 @@
 {
-  "name": "Sophorn Lim Portfolio",
-  "description": "Interactive professional portfolio and AI recruiter assistant for Sophorn Lim, IT Lead and Data Systems Specialist.",
+  "name": "Sophorn Lim",
+  "description": "Interactive professional portfolio for Sophorn Lim, Data Management IT Lead and Data Systems Specialist.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

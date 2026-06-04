@@ -24,7 +24,8 @@ import {
   Youtube,
   Instagram,
   FileText,
-  RefreshCw
+  RefreshCw,
+  ChevronLeft
 } from "lucide-react";
 
 import { db, handleFirestoreError, OperationType } from "./firebase";
@@ -37,7 +38,8 @@ import {
   skillCategories, 
   certifications,
   operationalMilestones,
-  coverLetterData
+  coverLetterData,
+  achievements
 } from "./data";
 
 import AiChatbot from "./components/AiChatbot";
@@ -67,15 +69,15 @@ export default function App() {
   // Customizable body paragraphs
   const [clSalutation, setClSalutation] = useState("Dear Hiring Manager,");
   const [clPara1, setClPara1] = useState("I am writing to express my strong interest in the IT System and Support Officer position at Cambodia Development Resource Institute, as advertised on LinkedIn. With over 20 years of progressive experience in IT infrastructure, data management, geospatial systems, and full-stack development across public health and humanitarian sectors, I am confident in my ability to deliver meaningful technical leadership for your regional operations.");
-  const [clPara2, setClPara2] = useState("Most recently, as a National Consultant with the World Health Organization supporting Greater Mekong Subregion countries — including Cambodia, Lao PDR, Myanmar, Thailand, and Vietnam — I led the validation, analysis, and interpretation of malaria surveillance data through DHIS2 platforms. I developed HTML-based reports and mobile applications integrated with the Malaria Elimination Database (MEDB), and produced epidemiological summaries for national programs, regional steering committees, and international donors. In my preceding role as Data Management Officer at WHO, I built end-to-end digital surveillance systems for Hepatitis and Rabies on DHIS2, developed a comprehensive ArcGIS health facility map for Cambodia, and managed daily data quality assurance across national health datasets.");
+  const [clPara2, setClPara2] = useState("Most recently, as a National Consultant with the World Health Organization supporting Greater Mekong Subregion countries including Cambodia, Lao PDR, Myanmar, Thailand, and Vietnam I led the validation, analysis, and interpretation of malaria surveillance data through DHIS2 platforms. I developed HTML-based reports and mobile applications integrated with the Malaria Elimination Database (MEDB), and produced epidemiological summaries for national programs, regional steering committees, and international donors. In my preceding role as Data Management Officer at WHO, I built end-to-end digital surveillance systems for Hepatitis and Rabies on DHIS2, developed a comprehensive ArcGIS health facility map for Cambodia, and managed daily data quality assurance across national health datasets.");
   const [clPara3, setClPara3] = useState("At Norwegian People's Aid (NPA), I served as Project Manager for the Humanitarian Disarmament Project in Ratanakiri Province, overseeing field survey teams, developing SOPs, and ensuring rigorous quality assurance across all operations. I designed and deployed ArcGIS Online dashboards, Survey123 tools, and GPS-integrated workflows that enabled real-time field data tracking and senior management reporting. My experience managing cross-functional teams and coordinating with national authorities has sharpened my ability to lead in complex, multi-stakeholder environments.");
-  const [clPara4, setClPara4] = useState("My technical toolkit includes DHIS2, ArcGIS (Desktop & Online), QGIS, Survey123, Go.Data, SharePoint, Kobo Toolbox, GPS technology, and full-stack web and mobile application development. I hold a CISCO CCNA2 certification in network engineering and have extensive hands-on experience in IT infrastructure support, system maintenance, and user training — including four years as an IT instructor and network administrator. I am currently completing a Master of Science in Information Technology at Build Bright University.");
+  const [clPara4, setClPara4] = useState("My technical toolkit includes DHIS2, ArcGIS (Desktop & Online), QGIS, Survey123, Go.Data, SharePoint, Kobo Toolbox, GPS technology, and full-stack web and mobile application development. I hold a CISCO CCNA2 certification in network engineering and have extensive hands-on experience in IT infrastructure support, system maintenance, and user training including four years as an IT instructor and network administrator. I am currently completing a Master of Science in Information Technology at Build Bright University.");
   const [clPara5, setClPara5] = useState("I am drawn to Cambodia Development Resource Institute's mission-driven approach and its commitment to using technology and data to address complex development challenges. The IT System and Support Officer role aligns directly with my passion for leveraging digital tools to strengthen operational effectiveness across diverse, geographically distributed teams. I am eager to bring my regional experience, multilingual capabilities, and technical depth to support your based programs.");
-  const [clPara6, setClPara6] = useState("I would welcome the opportunity to discuss how my background and skills align with Cambodia Development Resource Institute's needs. I am available for an interview at your earliest convenience and can be reached by email at sophornlimnpa@gmail.com or by phone at +855 12 964 495 / +855 69 767 696.");
+  const [clPara6, setClPara6] = useState("I would welcome the opportunity to discuss how my background and skills align with Cambodia Development Resource Institute's needs. I am available for an interview at your earliest convenience and can be reached by email at sophornlimnpa@gmail.com or by phone at +855 12 964 495 / +855 69 767 696 +855 717 111 007.");
   const [clClosing, setClClosing] = useState("Thank you sincerely for your time and consideration. I look forward to the opportunity to contribute to your team's success.");
   const [clSignOff, setClSignOff] = useState("Yours sincerely,");
   const [clSignOffName, setClSignOffName] = useState("Sophorn Lim");
-  const [clSignOffTitle, setClSignOffTitle] = useState("Applicant – IT Support Lead, Asia");
+  const [clSignOffTitle, setClSignOffTitle] = useState("Applicant – Data Management and IT Support Lead");
 
   const [clTitle2, setClTitle2] = useState("Data Management & Analytical Expertise");
   const [clTitle3, setClTitle3] = useState("Project Leadership & Field Operations");
@@ -88,6 +90,9 @@ export default function App() {
   // Interactive feature states
   const [showFloatingChat, setShowFloatingChat] = useState(false);
   const [showPrintModal, setShowPrintModal] = useState(false);
+
+  // Carousel state for achievements
+  const [carouselIndex, setCarouselIndex] = useState<Record<string, number>>({});
 
   // Form states
   const [formName, setFormName] = useState("");
@@ -143,6 +148,152 @@ export default function App() {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setMenuOpen(false);
+  };
+
+  const techIcons = {
+    React: {
+      label: "React",
+      svg: (
+        <svg viewBox="-10.5 -9.45 21 18.9" className="w-5 h-5" fill="#61dafb">
+          <circle cx="0" cy="0" r="2.05" />
+          <g stroke="#61dafb" strokeWidth="1" fill="none">
+            <ellipse rx="11" ry="4.2" />
+            <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+            <ellipse rx="11" ry="4.2" transform="rotate(-60)" />
+          </g>
+        </svg>
+      ),
+    },
+    TypeScript: {
+      label: "TypeScript",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-4 h-4">
+          <rect width="24" height="24" rx="2" fill="#3178c6" />
+          <path fill="#fff" d="M5.5 12.5v-2h13v2h-5.5v8h-2v-8z" />
+        </svg>
+      ),
+    },
+    Express: {
+      label: "Express",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="#e8e4dc" strokeWidth="1.5"/>
+          <text x="12" y="15.5" textAnchor="middle" fill="#e8e4dc" fontSize="11" fontWeight="bold" fontFamily="Arial, sans-serif">ex</text>
+        </svg>
+      ),
+    },
+    PostgreSQL: {
+      label: "PostgreSQL",
+      svg: (
+        <svg viewBox="0 0 128 128" className="w-5 h-5" fill="none">
+          <path d="M115.731 77.44c-13.925 2.873-14.882-1.842-14.882-1.842 14.703-21.816 20.849-49.51 15.545-56.287C101.924.823 76.875 9.566 76.457 9.793l-.135.024c-2.751-.571-5.83-.911-9.291-.967-6.301-.103-11.08 1.652-14.707 4.402 0 0-44.684-18.408-42.606 23.151.442 8.842 12.672 66.899 27.26 49.363 5.332-6.412 10.483-11.834 10.483-11.834 2.559 1.699 5.622 2.567 8.833 2.255l.25-.212c-.078.796-.042 1.575.1 2.497-3.758 4.199-2.654 4.936-10.167 6.482-7.602 1.566-3.136 4.355-.22 5.084 3.534.884 11.712 2.136 17.237-5.598l-.221.882c1.473 1.18 2.507 7.672 2.334 13.557-.174 5.885-.29 9.926.871 13.082 1.16 3.156 2.316 10.256 12.192 8.14 8.252-1.768 12.528-6.351 13.124-13.995.422-5.435 1.377-4.631 1.438-9.49l.767-2.3c.884-7.367.14-9.743 5.225-8.638l1.235.108c3.742.17 8.639-.602 11.514-1.938 6.19-2.871 9.861-7.667 3.758-6.408z" fill="#336791"/>
+          <path d="M75.957 122.307c-8.232 0-10.84-6.519-11.907-9.185-1.562-3.907-1.899-19.069-1.551-31.503a1.59 1.59 0 011.64-1.55 1.594 1.594 0 011.55 1.639c-.401 14.341.168 27.337 1.324 30.229 1.804 4.509 4.54 8.453 12.275 6.796 7.343-1.575 10.093-4.359 11.318-11.46.94-5.449 2.799-20.951 3.028-24.01a1.593 1.593 0 011.71-1.472 1.597 1.597 0 011.472 1.71c-.239 3.185-2.089 18.657-3.065 24.315-1.446 8.387-5.185 12.191-13.794 14.037-1.463.313-2.792.453-4 .454z" fill="#fff"/>
+          <path d="M31.321 90.466a6.71 6.71 0 01-2.116-.35c-5.347-1.784-10.44-10.492-15.138-25.885-3.576-11.717-5.842-23.947-6.041-27.922-.589-11.784 2.445-20.121 9.02-24.778 13.007-9.216 34.888-.44 35.813-.062a1.596 1.596 0 01-1.207 2.955c-.211-.086-21.193-8.492-32.768-.285-5.622 3.986-8.203 11.392-7.672 22.011.167 3.349 2.284 15.285 5.906 27.149 4.194 13.742 8.967 22.413 13.096 23.79.648.216 2.62.873 5.439-2.517A245.272 245.272 0 0145.88 73.046a1.596 1.596 0 012.304 2.208c-.048.05-4.847 5.067-10.077 11.359-2.477 2.979-4.851 3.853-6.786 3.853z" fill="#fff"/>
+        </svg>
+      ),
+    },
+    Java: {
+      label: "Java",
+      svg: (
+        <svg viewBox="0 0 128 128" className="w-5 h-5" fill="none">
+          <path d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z" fill="#0074BD"/>
+          <path d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z" fill="#EA2D2E"/>
+          <path d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z" fill="#0074BD"/>
+          <path d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z" fill="#EA2D2E"/>
+          <path d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z" fill="#0074BD"/>
+        </svg>
+      ),
+    },
+    "Spring Boot": {
+      label: "Spring Boot",
+      svg: (
+        <svg viewBox="0 0 128 128" className="w-5 h-5" fill="none">
+          <path d="M116.452 6.643a59.104 59.104 0 01-6.837 12.136A64.249 64.249 0 0064.205-.026C28.984-.026 0 28.982 0 64.242a64.316 64.316 0 0019.945 46.562l2.368 2.1a64.22 64.22 0 0041.358 15.122c33.487 0 61.637-26.24 64.021-59.683 1.751-16.371-3.051-37.077-11.24-61.7zM29.067 111.17a5.5 5.5 0 01-4.269 2.034c-3.018 0-5.487-2.484-5.487-5.502 0-3.017 2.485-5.501 5.487-5.501 1.25 0 2.485.433 3.452 1.234 2.351 1.9 2.718 5.384.817 7.735zm87.119-19.238c-15.843 21.122-49.68 14.003-71.376 15.02 0 0-3.852.234-7.721.867 0 0 1.45-.617 3.335-1.334 15.226-5.301 22.43-6.335 31.685-11.086 17.427-8.869 34.654-28.274 38.24-48.463-6.637 19.422-26.75 36.11-45.077 42.895-12.557 4.635-35.238 9.136-35.238 9.136l-.917-.484c-15.442-7.518-15.91-40.977 12.157-51.78 12.291-4.735 24.048-2.134 37.323-5.302 14.175-3.367 30.568-14.004 37.238-27.874 7.471 22.19 16.46 56.932.35 78.405z" fill="#77bc1f"/>
+        </svg>
+      ),
+    },
+    "Tailwind CSS": {
+      label: "Tailwind CSS",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="#38bdf8">
+          <path d="M12 4C8 4 5.5 6.5 4.5 11.5c1.5-2.5 3.25-3.44 5.25-3.12 1.14.18 1.95.7 2.85 1.58C13.3 10.66 14.62 12 17 12c4 0 6.5-2.5 7.5-7.5-1.5 2.5-3.25 3.44-5.25 3.12-1.14-.18-1.95-.7-2.85-1.58C15.7 5.34 14.38 4 12 4zM4.5 12C.5 12-2 14.5-3 19.5c1.5-2.5 3.25-3.44 5.25-3.12 1.14.18 1.95.7 2.85 1.58C5.7 18.66 7.12 20 9.5 20c4 0 6.5-2.5 7.5-7.5-1.5 2.5-3.25 3.44-5.25 3.12-1.14-.18-1.95-.7-2.85-1.58C8.3 13.34 6.88 12 4.5 12z"/>
+        </svg>
+      ),
+    },
+    Tailwind: {
+      label: "Tailwind",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="#38bdf8">
+          <path d="M12 4C8 4 5.5 6.5 4.5 11.5c1.5-2.5 3.25-3.44 5.25-3.12 1.14.18 1.95.7 2.85 1.58C13.3 10.66 14.62 12 17 12c4 0 6.5-2.5 7.5-7.5-1.5 2.5-3.25 3.44-5.25 3.12-1.14-.18-1.95-.7-2.85-1.58C15.7 5.34 14.38 4 12 4zM4.5 12C.5 12-2 14.5-3 19.5c1.5-2.5 3.25-3.44 5.25-3.12 1.14.18 1.95.7 2.85 1.58C5.7 18.66 7.12 20 9.5 20c4 0 6.5-2.5 7.5-7.5-1.5 2.5-3.25 3.44-5.25 3.12-1.14-.18-1.95-.7-2.85-1.58C8.3 13.34 6.88 12 4.5 12z"/>
+        </svg>
+      ),
+    },
+    "React Native": {
+      label: "React Native",
+      svg: (
+        <svg viewBox="-10.5 -9.45 21 18.9" className="w-5 h-5" fill="#61dafb">
+          <circle cx="0" cy="0" r="2.05" />
+          <g stroke="#61dafb" strokeWidth="1" fill="none">
+            <ellipse rx="11" ry="4.2" />
+            <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+            <ellipse rx="11" ry="4.2" transform="rotate(-60)" />
+          </g>
+        </svg>
+      ),
+    },
+    "Node JS": {
+      label: "Node JS",
+      svg: (
+        <svg viewBox="0 0 128 128" className="w-5 h-5" fill="none">
+          <path fill="#689f63" d="M116.465 93.262c2.442-1.418 3.96-4.02 3.96-6.899V41.637c0-2.879-1.518-5.481-3.96-6.899l-44.24-25.56a7.97 7.97 0 00-7.94 0l-44.28 25.56A7.949 7.949 0 0019.06 41.637v44.726c0 2.879 1.518 5.481 3.96 6.899l44.24 25.56a7.97 7.97 0 007.94 0l44.24-25.56h.025z"/>
+          <path fill="#333" d="M109.635 98.358c-1.67-1.748-4.517-2.2-6.424-.897l-5.26 3.04c-2.935 1.7-4.767 4.836-4.767 8.255v6.08c0 3.419 1.832 6.556 4.766 8.255l5.261 3.04c1.907 1.303 4.753.85 6.424-.897l5.261-5.274c1.285-1.291 1.285-3.384 0-4.675l-5.26-5.274v-4.675l5.26-5.274c1.285-1.29 1.285-3.383 0-4.674l-5.26-5.274zm-4.63 23.22l-5.26-3.04c-.15-.087-.217-.248-.217-.385v-6.08c0-.137.067-.298.216-.385l5.261-3.04c.149-.087.283-.087.432 0l5.26 3.04c.15.087.217.248.217.385v6.08c0 .137-.067.298-.217.385l-5.26 3.04c-.149.087-.283.087-.432 0v-.001zM92.482 66.466c0-2.128-1.454-4.102-3.503-5.08-2.67-1.218-5.55-1.213-8.238.001-2.056.976-3.517 2.947-3.517 5.08v27.195c0 1.432-.778 2.768-2.022 3.474-1.245.706-2.78.706-4.024 0l-4.654-2.688a4.042 4.042 0 01-2.022-3.474v-6.775c0-1.432.777-2.768 2.022-3.474l6.788-3.919c1.244-.719 2.777-.719 4.022 0l5.215 3.012c1.05.606 2.368.243 2.974-.806.607-1.05.244-2.367-.806-2.974l-5.215-3.012c-1.245-.719-2.78-1.085-4.343-1.085-1.563 0-3.099.366-4.344 1.085l-6.788 3.919c-2.495 1.44-4.044 4.11-4.044 6.969v6.775c0 2.86 1.549 5.53 4.044 6.969l4.654 2.688a8.673 8.673 0 004.344 1.085c1.564 0 3.099-.366 4.344-1.085l6.788-3.919c2.495-1.44 4.045-4.11 4.045-6.969V66.466h-.003z"/>
+        </svg>
+      ),
+    },
+    ArcGIS: {
+      label: "ArcGIS",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#2c5fc7"/>
+          <path d="M12 6c-1.7 0-3 1.3-3 3 0 2.2 3 6 3 6s3-3.8 3-6c0-1.7-1.3-3-3-3zm0 4.2c-.7 0-1.2-.5-1.2-1.2s.5-1.2 1.2-1.2 1.2.5 1.2 1.2-.5 1.2-1.2 1.2z" fill="#fff"/>
+        </svg>
+      ),
+    },
+    QGIS: {
+      label: "QGIS",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none">
+          <circle cx="12" cy="12" r="10" fill="#589632"/>
+          <text x="12" y="16" textAnchor="middle" fill="#fff" fontSize="14" fontWeight="bold" fontFamily="Arial, sans-serif">Q</text>
+          <path d="M16 10c0 2.5-1.8 4.5-4 4.5S8 12.5 8 10" stroke="#fff" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+          <path d="M12 14.5v3" stroke="#fff" strokeWidth="1.2" strokeLinecap="round"/>
+        </svg>
+      ),
+    },
+    "Google Maps": {
+      label: "Google Maps",
+      svg: (
+        <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none">
+          <path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5s1.1-2.5 2.5-2.5 2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5z" fill="#34a853"/>
+          <circle cx="12" cy="9" r="1.5" fill="#fff"/>
+        </svg>
+      ),
+    },
+    DHIS2: {
+      label: "DHIS2",
+      svg: (
+        <svg viewBox="0 0 200 182" className="w-5 h-5" fill="#0080d4">
+          <path d="M191.73,60,109,6.34a19.73,19.73,0,0,0-20.32,0L8.31,58.43a12,12,0,0,0-.25,20.63L88.6,134a19.37,19.37,0,0,0,20.37.25l82.76-53.65a11.88,11.88,0,0,0,0-20.59Zm-91,61.45a4.29,4.29,0,0,1-3.49-.05l-77-52.49L97,19.13a4.76,4.76,0,0,1,3.74,0L179.6,70.28Z"/>
+          <path d="M88.66,47.82,45.1,76.06l13.61,9.33L97,60.61a4.76,4.76,0,0,1,3.74,0l39.37,25.52,14-9.06L109,47.82A19.76,19.76,0,0,0,88.66,47.82Z"/>
+          <path d="M191.73,101.46l-8.62-5.59-14.05,9.06,10.53,6.83-78.91,51.15a4.37,4.37,0,0,1-3.49,0l-77-52.5,10-6.47L16.55,94.57,8.31,99.91a12,12,0,0,0-.25,20.63L88.6,175.46a19.34,19.34,0,0,0,20.37.24l82.75-53.65a11.88,11.88,0,0,0,0-20.59Z"/>
+        </svg>
+      ),
+    },
+  };
+
+  const TechIcon = ({ name }: { name: string }) => {
+    const icon = techIcons[name];
+    return icon ? icon.svg : <span className="text-[10px] font-mono text-muted-blue">{name}</span>;
   };
 
   // Form handling -> writes to Firestore, alerts user via clean state indicators with mailto fallback
@@ -301,6 +452,14 @@ export default function App() {
           </li>
           <li>
             <button 
+              onClick={() => scrollToSection("achievements")} 
+              className="font-sans text-[11px] tracking-widest uppercase text-[#8a9bb0] hover:text-[#2e9bbf] transition-colors cursor-pointer"
+            >
+              Achievements
+            </button>
+          </li>
+          <li>
+            <button 
               onClick={() => scrollToSection("contact")} 
               className="font-sans text-[11px] tracking-widest uppercase text-[#8a9bb0] hover:text-[#2e9bbf] transition-colors cursor-pointer"
             >
@@ -363,6 +522,12 @@ export default function App() {
           className="font-sans text-xl font-medium text-off-white hover:text-teal-light cursor-pointer"
         >
           Cover Letter
+        </button>
+        <button 
+          onClick={() => scrollToSection("achievements")} 
+          className="font-sans text-xl font-medium text-off-white hover:text-teal-light cursor-pointer"
+        >
+          Achievements
         </button>
         <button 
           onClick={() => scrollToSection("contact")} 
@@ -729,9 +894,6 @@ export default function App() {
                 <h2 className="font-sans font-bold text-3xl sm:text-5xl text-off-white">
                   Cover Letter
                 </h2>
-                <p className="text-sm text-muted-blue max-w-sm">
-                  Tailored application letter for specific organizations and positions. Fully interactive and printable.
-                </p>
               </div>
 
               {/* Edit Toggle Icon */}
@@ -875,6 +1037,115 @@ export default function App() {
 
       <hr className="divider-line print:hidden" />
 
+      {/* ── ACHIEVEMENTS ── */}
+      <section id="achievements" className="relative scroll-margin-top-[72px] bg-[#071529] print:hidden">
+        <div className="max-w-[1520px] mx-auto py-28 px-6 md:px-16 space-y-12">
+          <div className="text-left flex flex-col items-start">
+            <div className="font-sans text-[11px] tracking-[0.2em] uppercase text-teal-light mb-4 flex items-center justify-start gap-3">
+              <span className="block w-6 h-[1px] bg-teal-light"></span>
+              My Work
+            </div>
+
+            <h2 className="font-sans font-bold text-3xl sm:text-5xl text-off-white mb-4 text-left">
+              Achievements
+            </h2>
+
+            <p className="text-sm text-muted-blue max-w-[560px] text-left">
+              Software and systems I have built — from full-stack applications to national health surveillance platforms.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {achievements.map((ach) => {
+              const currentIdx = carouselIndex[ach.id] ?? 0;
+              const hasImages = ach.images.length > 0;
+              const slides = hasImages ? ach.images : [];
+              const showPlaceholder = !hasImages;
+
+              const goTo = (idx: number) => {
+                setCarouselIndex(prev => ({ ...prev, [ach.id]: idx }));
+              };
+
+              return (
+              <div
+                key={ach.id}
+                className="bg-[#0f2540] border border-teal-dark/30 rounded-2xl overflow-hidden flex flex-col text-left hover:border-gold/50 transition-all duration-300"
+              >
+                {/* Image carousel area */}
+                <div className="relative h-64 bg-[#0a1b2f] flex items-center justify-center border-b border-teal-dark/20 overflow-hidden group">
+                  {showPlaceholder ? (
+                    <div className="flex flex-col items-center gap-3 text-muted-blue/40">
+                      <Layers className="w-12 h-12" />
+                      <span className="text-[10px] uppercase tracking-wider">{ach.title}</span>
+                    </div>
+                  ) : (
+                    <>
+                      <img
+                        src={slides[currentIdx]}
+                        alt={`${ach.title} screenshot ${currentIdx + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+
+                      {slides.length > 1 && (
+                        <>
+                          <button
+                            onClick={() => goTo(currentIdx === 0 ? slides.length - 1 : currentIdx - 1)}
+                            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/70 transition-all cursor-pointer"
+                          >
+                            <ChevronLeft className="w-4 h-4" />
+                          </button>
+                          <button
+                            onClick={() => goTo(currentIdx === slides.length - 1 ? 0 : currentIdx + 1)}
+                            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 hover:bg-black/70 transition-all cursor-pointer"
+                          >
+                            <ChevronRight className="w-4 h-4" />
+                          </button>
+
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1.5">
+                            {slides.map((_, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => goTo(idx)}
+                                className={`w-1.5 h-1.5 rounded-full transition-all cursor-pointer ${
+                                  idx === currentIdx ? "bg-gold w-3" : "bg-white/40 hover:bg-white/70"
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+                </div>
+
+                <div className="p-6 flex flex-col gap-4 flex-1">
+                  <div className="flex items-start justify-between gap-3">
+                    <h3 className="font-sans font-bold text-lg text-off-white">{ach.title}</h3>
+                    <div className="flex flex-wrap gap-1.5 shrink-0 items-center">
+                      {ach.techStack.map((tech, idx) => (
+                        <span key={idx} className="flex items-center">
+                        <TechIcon name={tech} />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-blue leading-relaxed">
+                    {ach.description}
+                    {ach.link && (
+                      <> &mdash; <a href={ach.link} target="_blank" rel="noopener noreferrer" className="text-teal-light hover:underline font-medium">View Project</a></>
+                    )}
+                  </p>
+                </div>
+              </div>
+              );
+            })}
+          </div>
+
+        </div>
+      </section>
+
+      <hr className="divider-line print:hidden" />
+
       {/* ── CONTACT ── */}
       <section id="contact" className="relative scroll-margin-top-[72px] bg-[#071529] print:hidden">
         <div className="max-w-[1100px] mx-auto py-28 px-6 md:px-16 space-y-12">
@@ -894,10 +1165,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            
-            {/* Left Column: Contact details & References stacked */}
-            <div className="lg:col-span-5 space-y-8 flex flex-col justify-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
               
               {/* Contact details */}
               <div className="bg-[#0f2540] border border-teal-dark/30 p-8 sm:p-10 space-y-6 rounded-2xl flex flex-col justify-between text-left items-stretch">
@@ -1037,122 +1305,6 @@ export default function App() {
                   ))}
                 </div>
               </div>
-            </div>
-
-            {/* Right Column: Secure Inquiries Contact form */}
-            <div className="lg:col-span-7 bg-[#0f2540] border border-teal-dark/30 p-8 sm:p-10 rounded-2xl flex flex-col justify-between text-left items-stretch relative overflow-hidden h-full">
-              <div>
-                <div className="flex items-center justify-between border-b border-teal-dark/20 pb-4 mb-6">
-                  <div className="flex flex-col items-start">
-                    <h3 className="font-sans text-xl font-medium text-off-white mb-1">Send a Message</h3>
-                    <p className="text-xs text-muted-blue">Directly write to Sophorn. Your inquiry is securely saved.</p>
-                  </div>
-                  <div className="text-[9px] text-teal-light font-mono bg-teal-dark/20 border border-teal-light/10 rounded px-2 py-0.5 uppercase tracking-wider flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    Firebase Cloud Secured
-                  </div>
-                </div>
-
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col items-start gap-1.5">
-                      <label className="text-[10px] uppercase tracking-wider font-mono text-muted-blue">Your Name <span className="text-red-400">*</span></label>
-                      <input 
-                        type="text" 
-                        value={formName}
-                        onChange={(e) => setFormName(e.target.value)}
-                        placeholder="John Doe"
-                        className="w-full bg-[#0a1b2f] border border-teal-dark/40 rounded-xl px-4 py-2.5 text-xs text-off-white placeholder:text-muted-blue/40 outline-none focus:border-teal-light transition-all"
-                        required
-                      />
-                    </div>
-                    <div className="flex flex-col items-start gap-1.5">
-                      <label className="text-[10px] uppercase tracking-wider font-mono text-muted-blue">Your Email <span className="text-red-400">*</span></label>
-                      <input 
-                        type="email" 
-                        value={formEmail}
-                        onChange={(e) => setFormEmail(e.target.value)}
-                        placeholder="john@example.com"
-                        className="w-full bg-[#0a1b2f] border border-teal-dark/40 rounded-xl px-4 py-2.5 text-xs text-off-white placeholder:text-muted-blue/40 outline-none focus:border-teal-light transition-all"
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col items-start gap-1.5">
-                      <label className="text-[10px] uppercase tracking-wider font-mono text-muted-blue">Phone (Optional)</label>
-                      <input 
-                        type="tel" 
-                        value={formPhone}
-                        onChange={(e) => setFormPhone(e.target.value)}
-                        placeholder="+855 ..."
-                        className="w-full bg-[#0a1b2f] border border-teal-dark/40 rounded-xl px-4 py-2.5 text-xs text-off-white placeholder:text-muted-blue/40 outline-none focus:border-teal-light transition-all"
-                      />
-                    </div>
-                    <div className="flex flex-col items-start gap-1.5">
-                      <label className="text-[10px] uppercase tracking-wider font-mono text-muted-blue">Subject (Optional)</label>
-                      <input 
-                        type="text" 
-                        value={formSubject}
-                        onChange={(e) => setFormSubject(e.target.value)}
-                        placeholder="Consultancy Proposal"
-                        className="w-full bg-[#0a1b2f] border border-teal-dark/40 rounded-xl px-4 py-2.5 text-xs text-off-white placeholder:text-muted-blue/40 outline-none focus:border-teal-light transition-all"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col items-start gap-1.5">
-                    <label className="text-[10px] uppercase tracking-wider font-mono text-muted-blue">Message Body <span className="text-red-400">*</span></label>
-                    <textarea 
-                      rows={5}
-                      value={formMessage}
-                      onChange={(e) => setFormMessage(e.target.value)}
-                      placeholder="Discuss career opportunities, project consultancies, or send simple greetings..."
-                      className="w-full bg-[#0a1b2f] border border-teal-dark/40 rounded-xl px-4 py-2.5 text-xs text-off-white placeholder:text-muted-blue/40 outline-none focus:border-teal-light transition-all resize-none"
-                      required
-                    />
-                  </div>
-
-                  {/* Operational indicators */}
-                  {formError && (
-                    <div className="bg-red-500/10 border border-red-500/20 text-red-300 text-xs rounded-xl p-3 text-left">
-                      {formError}
-                    </div>
-                  )}
-
-                  {formSuccess && (
-                    <div className="bg-green-500/10 border border-green-500/25 text-teal-light text-xs rounded-xl p-3 text-left flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />
-                      <div>
-                        <strong>Inquiry Dispatched Successfully!</strong>
-                        <p className="mt-0.5 text-[11px] text-muted-blue">Your message was written directly into FireStore. Sophorn will contact you shortly.</p>
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="pt-2 flex justify-end">
-                    <button
-                      type="submit"
-                      disabled={formSubmitting}
-                      className="px-6 py-2.5 rounded-xl bg-teal-dark hover:bg-teal-light text-white text-xs font-semibold flex items-center gap-2 border border-teal-light/25 disabled:bg-deep disabled:text-muted-blue/30 disabled:border-teal-dark/30 transition-all shadow-lg hover:-translate-y-0.5 cursor-pointer"
-                    >
-                      {formSubmitting ? (
-                        <>
-                          <RefreshCw className="w-4.5 h-4.5 animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-3.5 h-3.5" />
-                          Send Secure Inquiry
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
 
           </div>
 

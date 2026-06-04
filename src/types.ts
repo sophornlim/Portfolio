@@ -32,6 +32,15 @@ export interface ProjectShowcase {
   details?: string;
 }
 
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  images: string[];
+  techStack: string[];
+  link: string;
+}
+
 export interface Message {
   id: string;
   role: "user" | "model";

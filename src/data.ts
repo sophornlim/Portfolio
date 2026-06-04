@@ -1,4 +1,4 @@
-import { WorkExperience, Education, SkillCategory, ProjectShowcase } from "./types";
+import { WorkExperience, Education, SkillCategory, ProjectShowcase, Achievement } from "./types";
 
 export const profileSummary = {
   name: "Sophorn Lim",
@@ -411,6 +411,131 @@ export const operationalMilestones: ProjectShowcase[] = [
     tags: ["WHO", "Go.Data", "RRT"],
     metric: "Rapid Response",
     metricLabel: "Outbreak Deployed Engine"
+  }
+];
+
+export const achievements: Achievement[] = [
+  {
+    id: "advance-pos",
+    title: "Advance Point Of Sale — Neary Khmer Restaurant",
+    description: "A comprehensive point-of-sale system built for Neary Khmer Restaurant in Siem Reap to manage sales, inventory, products, warehouses, and multi-language support. Features real-time reporting dashboards and role-based access control.",
+    images: [
+      "src/assets/images/Advance POS/Dashboard.png",
+      "src/assets/images/Advance POS/POS.png",
+      "src/assets/images/Advance POS/Products.png",
+      "src/assets/images/Advance POS/Warehouse.png",
+      "src/assets/images/Advance POS/Menu.png",
+      "src/assets/images/Advance POS/Sale Report.png",
+      "src/assets/images/Advance POS/Product Report.png",
+      "src/assets/images/Advance POS/Translate.png",
+      "src/assets/images/Advance POS/Login.png"
+    ],
+    techStack: ["React", "TypeScript", "Express", "PostgreSQL", "Tailwind CSS"],
+    link: "http://178.128.120.38/login"
+  },
+  {
+    id: "hrm-afd",
+    title: "Human Resource Management System — Action for Development",
+    description: "A full-featured HRM system built for Action for Development organization in Kampong Thom Province to manage and control projects, program activities, staff records, performance reviews, payroll, and asset management.",
+    images: [
+      "src/assets/images/Human Resource Management/Dashboard.png",
+      "src/assets/images/Human Resource Management/Employee.png",
+      "src/assets/images/Human Resource Management/Performance.png",
+      "src/assets/images/Human Resource Management/Reports.png",
+      "src/assets/images/Human Resource Management/Login.png"
+    ],
+    techStack: ["React", "TypeScript", "Express", "PostgreSQL", "Tailwind CSS"],
+    link: "http://162.0.228.121/hrm"
+  },
+  {
+    id: "barcode-generator",
+    title: "Barcode Generator System — Fish Farm",
+    description: "Built for a fish farm in Battambang to generate barcodes with fish name, weight, price, and expiry date for each fish before delivery to supermarkets.",
+    images: [
+      "src/assets/images/Barcode Generator/Login.png",
+      "src/assets/images/Barcode Generator/New Fish.png",
+      "src/assets/images/Barcode Generator/Barcode printing.png",
+      "src/assets/images/Barcode Generator/Generated barcode.png",
+      "src/assets/images/Barcode Generator/Report.png",
+      "src/assets/images/Barcode Generator/User Permission.png",
+      "src/assets/images/Barcode Generator/App Branding.png"
+    ],
+    techStack: ["React", "TypeScript", "Express", "PostgreSQL", "Tailwind CSS"],
+    link: "http://localhost:5173/permissions"
+  },
+  {
+    id: "romdoul-hotel",
+    title: "Romdoul Hotel Management System",
+    description: "A large-scale 5-star hotel management system built for a premier hotel in Phnom Penh. Features a landing page website for guest registration and direct booking, a web admin panel to manage/control all website content (text, photos, layout), and a main admin panel to manage the entire hotel system end-to-end. Currently 45% complete with an estimated 8 months remaining to full deployment.",
+    images: [
+      "src/assets/images/Romdoul Hotel Management/Overview Dashboard.png",
+      "src/assets/images/Romdoul Hotel Management/Operational Dashboard.png",
+      "src/assets/images/Romdoul Hotel Management/Occupancy.png",
+      "src/assets/images/Romdoul Hotel Management/Website.png"
+    ],
+    techStack: ["React", "TypeScript", "Express", "PostgreSQL", "Tailwind CSS"],
+    link: "http://localhost:5173/admin/dashboard/dashboard1"
+  },
+  {
+    id: "meal-system",
+    title: "DHIS2: MEAL System — Project Activity Management",
+    description: "A Monitoring, Evaluation, Accountability, and Learning system built on DHIS2 platform to manage and control all project activities in the field. Designed for a development organization operating in Preah Vihear, Kampong Cham, and Kampong Thom provinces. Includes an external data entry app for easier data entry compared to the default DHIS2 app. Manages participation from NGO staff, donors, government staff, and community members.",
+    images: [
+      "src/assets/images/MEAL System/Dashboard.png",
+      "src/assets/images/MEAL System/Data Entry.png",
+      "src/assets/images/MEAL System/Data Entry App.png"
+    ],
+    techStack: ["React", "Java", "Spring Boot", "PostgreSQL", "DHIS2"],
+    link: "http://162.0.228.121:8080/apps/dashboard#/"
+  },
+  {
+    id: "smart-pos",
+    title: "Smart POS — Restaurant Management Mobile App",
+    description: "A mobile point-of-sale system for large restaurant operations. Manages sales, order operations, kitchen screen, bartender screen, sold product tracking, inventory transactions, reporting, and invoice printing directly from a mobile device. Built with React Native for cross-platform deployment.",
+    images: [
+      "src/assets/images/Smart POS/Login.png",
+      "src/assets/images/Smart POS/Main Menu.png",
+      "src/assets/images/Smart POS/Food.png",
+      "src/assets/images/Smart POS/Food Category.png",
+      "src/assets/images/Smart POS/Food Subcategory.png",
+      "src/assets/images/Smart POS/Table Management.png",
+      "src/assets/images/Smart POS/Inventory.png",
+      "src/assets/images/Smart POS/Sold Record.png",
+      "src/assets/images/Smart POS/Invoice Checkout.png",
+      "src/assets/images/Smart POS/Invoice Payment.png",
+      "src/assets/images/Smart POS/Print Invoice.png",
+      "src/assets/images/Smart POS/Report.png",
+      "src/assets/images/Smart POS/Setting.png"
+    ],
+    techStack: ["React Native", "Node JS", "Tailwind", "PostgreSQL"],
+    link: ""
+  },
+  {
+    id: "arcgis-health-map",
+    title: "Health Financing — DHIS2 Government Funding Management",
+    description: "Developed on the DHIS2 platform to support the Department of Planning and Health Information at the Ministry of Health. Manages and controls government funding including daily, monthly, and yearly income from each health facility, expenses, and payments.",
+    images: [
+      "src/assets/images/Health Financing/Case Report.png",
+      "src/assets/images/Health Financing/Data Entry.png",
+      "src/assets/images/Health Financing/Report.png"
+    ],
+    techStack: ["DHIS2", "React", "Java", "PostgreSQL"],
+    link: ""
+  },
+  {
+    id: "field-data-app",
+    title: "Geographic Data — Health Facility GIS Mapping",
+    description: "Supported the Ministry of Health under WHO funding to collect and map all health facility locations across the entire country. Produced a comprehensive GIS map published on Google Maps to support the health coverage plan project of the Ministry of Health.",
+    images: [
+      "src/assets/images/Geographic Data/BanteayMeanchey.jpg",
+      "src/assets/images/Geographic Data/Battambang.jpg",
+      "src/assets/images/Geographic Data/Kampong Cham.jpg",
+      "src/assets/images/Geographic Data/OD Area.jpg",
+      "src/assets/images/Geographic Data/Phnom Penh.jpg",
+      "src/assets/images/Geographic Data/Siem Reap.jpg"
+    ],
+    techStack: ["ArcGIS", "QGIS", "Google Maps"],
+    link: ""
   }
 ];
 

@@ -75,7 +75,7 @@ ${PROMPT_KNOWLEDGE_BASE}
 
     // Call Gemini API
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.0-flash",
       contents: contents,
       config: {
         systemInstruction: systemInstruction,
@@ -105,7 +105,10 @@ async function boot() {
   if (process.env.NODE_ENV !== "production") {
     console.log("Starting server in development mode with Vite middleware...");
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: { port: 24679 },
+      },
       appType: "spa",
     });
     app.use(vite.middlewares);

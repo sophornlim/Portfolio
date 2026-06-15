@@ -37,10 +37,10 @@ export const profileSummary = {
       },
       {
         name: "Mr. NOU Panharith",
-        title: "Emergency Operations Center Project Manager",
-        org: "PSI Cambodia",
+        title: "Consumer Insights and Analysis Manager",
+        org: "ABA Bank",
         tel: "+855 12 662 268",
-        email: "npanharith@psi.org.kh"
+        email: "NOU.Panharith@ababank.com"
       }
     ]
   }
